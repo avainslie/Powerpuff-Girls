@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class FirestoreAdapter extends FirestoreRecyclerAdapter<Resources, FirestoreAdapter.ResourcesViewHolder> {
 
@@ -23,7 +24,7 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<Resources, Firest
      */
     public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<Resources> options, OnListItemClick onListItemClick) {
         super(options);
-        this.onListItemClick =  onListItemClick;
+        this.onListItemClick = onListItemClick;
     }
 
     @Override
@@ -56,14 +57,16 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<Resources, Firest
             itemView.setOnClickListener(this);
         }
 
+
+        // onListItemClick.onItemClick(getAdapterPosition()) returns the index, not ID
         @Override
         public void onClick(View v) {
-            onListItemClick.onItemClick();
+            onListItemClick.onItemClick(getAdapterPosition());
         }
     }
 
     public interface OnListItemClick {
-        void onItemClick();
+        void onItemClick(int position);
     }
 
 }

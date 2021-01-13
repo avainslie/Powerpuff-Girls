@@ -1,25 +1,18 @@
 package com.example.powerpuffgirls;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 // TODO: Add intent when click on resource and filter by user info on clicking filter btn
 
@@ -74,14 +67,20 @@ public class RecommendationsActivity extends AppCompatActivity implements Firest
 
     User user = new User("Ainslie","Biology");
 
-    public void filter(View v){
-        if (user.getDegreeMajor().equals("Biology")){ // replace "biology" with get text from resource
 
-        }
+    /**
+     * Filters what user sees based on their data
+     * @param v
+     */
+    public void filter(View v){
+
     }
 
     @Override
-    public void onItemClick() {
-        Log.d("ITEM CLICK", "THE ITEM IS CLICKED");
+    public void onItemClick(int position) {
+        Log.d("ITEM CLICK", "THE ITEM IS CLICKED " + position);
+        Intent i = new Intent(this, IndividualResource.class);
+        startActivity(i);
     }
+
 }

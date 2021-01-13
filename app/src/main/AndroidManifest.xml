@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PowerpuffGirls">
-        <activity android:name=".RecommendationsActivity"></activity>
+        <activity android:name=".IndividualResource"></activity>
+        <activity android:name=".RecommendationsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
