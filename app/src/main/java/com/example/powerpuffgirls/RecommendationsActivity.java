@@ -10,54 +10,50 @@ import android.util.Log;
 import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 // TODO: Add intent when click on resource and filter by user info on clicking filter btn
 
-public class RecommendationsActivity extends AppCompatActivity implements FirestoreAdapter.OnListItemClick {
+public class RecommendationsActivity extends AppCompatActivity {
 
-    private static final String TAG = "hello" ;
-    private RecyclerView ResourceRecycler;
-    private FirebaseFirestore firebaseFirestore;
-    private FirestoreAdapter adapter;
+    // gets data
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference resourceRef = db.collection("Resources");
+    private ResourceAdapter adapter;
 
 
-    // https://www.youtube.com/watch?v=cBwaJYocb9I&ab_channel=TVACStudio
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommendations2);
 
-        ResourceRecycler = findViewById(R.id.ResourceRecycler);
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        setUpRecyclerView();
 
-        // Query
-        Query query = firebaseFirestore.collection("Resources");
+        }
 
-
-        // Options
-        FirestoreRecyclerOptions<Resources> options = new FirestoreRecyclerOptions.Builder<Resources>()
-                .setQuery(query, Resources.class).build();
+        private void setUpRecyclerView(){
+            // Create query
+            Query query = resourceRef;
 
 
-        // Adapter
-        adapter = new FirestoreAdapter(options, this);
+            // Create options, how we get query into adapter
+            FirestoreRecyclerOptions<Resources> options = new FirestoreRecyclerOptions.Builder<Resources>()
+                    .setQuery(query, Resources.class).build();
 
-        ResourceRecycler.setHasFixedSize(true);
-        ResourceRecycler.setLayoutManager(new LinearLayoutManager( this));
-        ResourceRecycler.setAdapter(adapter);
+            // Assign adapter variable
+            adapter = new ResourceAdapter(options);
 
+            // Create ref to recycler view
+            RecyclerView recyclerView = findViewById(R.id.ResourceRecycler);
+            recyclerView.setHasFixedSize(true); // for performance
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
     }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-
 
     @Override
     protected void onStart() {
@@ -65,22 +61,10 @@ public class RecommendationsActivity extends AppCompatActivity implements Firest
         adapter.startListening();
     }
 
-    User user = new User("Ainslie","Biology");
-
-
-    /**
-     * Filters what user sees based on their data
-     * @param v
-     */
-    public void filter(View v){
-
-    }
-
     @Override
-    public void onItemClick(int position) {
-        Log.d("ITEM CLICK", "THE ITEM IS CLICKED " + position);
-        Intent i = new Intent(this, IndividualResource.class);
-        startActivity(i);
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
 }

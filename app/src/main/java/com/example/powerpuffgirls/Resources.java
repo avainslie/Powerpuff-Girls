@@ -16,6 +16,11 @@ public class Resources {
         Link = link;
     }
 
+    public Resources(String name, String description){
+        Name = name;
+        Description = description;
+    }
+
     public String getName() {
         return Name;
     }
