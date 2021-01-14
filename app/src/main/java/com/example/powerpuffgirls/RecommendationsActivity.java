@@ -53,6 +53,20 @@ public class RecommendationsActivity extends AppCompatActivity {
             recyclerView.setHasFixedSize(true); // for performance
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
+
+            adapter.setOnItemClickListener(new ResourceAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                    Resources resource = documentSnapshot.toObject(Resources.class);
+                    String id = documentSnapshot.getId();
+                    Log.d("CLICK","CLICKED" + id);
+
+                    Intent i = new Intent(RecommendationsActivity.this, IndividualResource.class);
+                    i.putExtra("id", id);
+
+                    startActivity(i);
+                }
+            });
     }
 
     @Override
