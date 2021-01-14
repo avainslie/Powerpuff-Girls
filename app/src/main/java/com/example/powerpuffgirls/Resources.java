@@ -1,7 +1,5 @@
 package com.example.powerpuffgirls;
 
-import com.google.firebase.firestore.Query;
-
 public class Resources {
 
     private String Name;
@@ -23,8 +21,6 @@ public class Resources {
         Description = description;
     }
 
-    public Resources(Query id) {
-    }
 
     public String getName() {
         return Name;
