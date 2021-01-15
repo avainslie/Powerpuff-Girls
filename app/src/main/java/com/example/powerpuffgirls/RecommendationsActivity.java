@@ -1,17 +1,15 @@
 package com.example.powerpuffgirls;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -30,6 +28,7 @@ public class RecommendationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_recommendations2);
 
         setUpRecyclerView();
@@ -54,18 +53,15 @@ public class RecommendationsActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
 
-            adapter.setOnItemClickListener(new ResourceAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                    Resources resource = documentSnapshot.toObject(Resources.class);
-                    String id = documentSnapshot.getId();
-                    Log.d("CLICK","CLICKED" + id);
+            adapter.setOnItemClickListener((documentSnapshot, position) -> {
+                Resources resource = documentSnapshot.toObject(Resources.class);
+                String id = documentSnapshot.getId();
+                Log.d("CLICK","CLICKED" + id);
 
-                    Intent i = new Intent(RecommendationsActivity.this, IndividualResource.class);
-                    i.putExtra("id", id);
+                Intent i = new Intent(RecommendationsActivity.this, IndividualResource.class);
+                i.putExtra("id", id);
 
-                    startActivity(i);
-                }
+                startActivity(i);
             });
     }
 

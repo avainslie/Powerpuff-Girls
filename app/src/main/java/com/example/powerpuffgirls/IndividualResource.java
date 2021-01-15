@@ -25,6 +25,7 @@ public class IndividualResource extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_individual_resource);
 
         resourceName = findViewById(R.id.resource_name);
