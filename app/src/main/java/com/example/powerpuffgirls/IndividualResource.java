@@ -36,24 +36,15 @@ public class IndividualResource extends AppCompatActivity {
         Log.d("New", "The id clicked is: " + id);
         DocumentReference docRef = db.collection("Resources").document(id);
         Log.d("docRef", docRef.getId());
+
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                } else {
-                    Log.d(TAG, "No such document");
-                }
-            } else {
-                Log.d(TAG, "get failed with ", task.getException());
+                resourceRef = document.toObject(Resources.class);
+                resourceName.setText(resourceRef.getName());
+                resourceDescription.setText(resourceRef.getDescription());
             }
         });
 
-        Log.d(TAG, "omfg");
-        resourceName.setText(resourceRef.getName());
-        Log.d("resName", "Name is: "+ resourceRef.getName());
-        resourceDescription.setText(resourceRef.getDescription());
-        Log.d("res", "Name is: "+ resourceRef.getName());
-        Log.d("resDesc", "Desc is: "+ resourceRef.getDescription());
     }
 }
