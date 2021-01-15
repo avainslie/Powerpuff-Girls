@@ -1,6 +1,8 @@
 package com.example.powerpuffgirls;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -16,15 +18,20 @@ public class IndividualResource extends AppCompatActivity {
 
     private TextView resourceName;
     private TextView resourceDescription;
+    private TextView resourceLink;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Resources resourceRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_resource);
 
-        resourceName = findViewById(R.id.Resource_name);
-        resourceDescription = findViewById(R.id.Resource_description);
+        resourceName = findViewById(R.id.resource_name);
+        resourceDescription = findViewById(R.id.resource_description);
+        resourceLink = findViewById(R.id.resource_link);
+        resourceLink.setClickable(true);
+        resourceLink.setMovementMethod(LinkMovementMethod.getInstance());
 
         setupTextViews();
 
@@ -43,6 +50,8 @@ public class IndividualResource extends AppCompatActivity {
                 resourceRef = document.toObject(Resources.class);
                 resourceName.setText(resourceRef.getName());
                 resourceDescription.setText(resourceRef.getDescription());
+                String link = resourceRef.getLink();
+                resourceLink.setText(Html.fromHtml("<a href=" + link + "> " + link + "</a>"));
             }
         });
 
