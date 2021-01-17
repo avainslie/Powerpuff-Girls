@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 //                            openFragment(HomeFragment.newInstance("", ""));
 //                            return true;
                         case R.id.resources_icon:
-                            openFragment(RecommendationsActivity.newInstance("", ""));
+                            openFragment(RecommendationsActivity.newInstance());
 //                              Intent i = new Intent(MainActivity.this, RecommendationsActivity.class);
 //                              startActivity(i);
                             return true;
