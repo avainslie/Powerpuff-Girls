@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottomNavigationView);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        //        openFragment(RecommendationsActivity.newInstance("", ""));
+        openFragment(HomeFragment.newInstance());
     }
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -30,15 +30,13 @@ public class MainActivity extends AppCompatActivity {
             item -> {
                 switch (item.getItemId()) {
                     case R.id.home_icon:
-//                            openFragment(HomeFragment.newInstance("", ""));
-//                            return true;
+                        openFragment(HomeFragment.newInstance());
+                        return true;
                     case R.id.resources_icon:
                         openFragment(RecommendationsFragment.newInstance());
-//                              Intent i = new Intent(MainActivity.this, RecommendationsActivity.class);
-//                              startActivity(i);
                         return true;
                     case R.id.user_icon:
-//                            openFragment(NotificationFragment.newInstance("", ""));
+//                            openFragment(UserFragment.newInstance("", ""));
 //                            return true;
                 }
                 return false;

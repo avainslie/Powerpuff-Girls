@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PowerpuffGirls">
         <activity android:name=".IndividualResource"></activity>
-        <activity android:name=".RecommendationsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
