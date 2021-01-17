@@ -33,36 +33,36 @@ public class RecommendationsActivity extends AppCompatActivity {
 
         setUpRecyclerView();
 
-        }
+    }
 
-        private void setUpRecyclerView(){
-            // Create query
-            Query query = resourceRef;
+    private void setUpRecyclerView(){
+        // Create query
+        Query query = resourceRef;
 
 
-            // Create options, how we get query into adapter
-            FirestoreRecyclerOptions<Resources> options = new FirestoreRecyclerOptions.Builder<Resources>()
-                    .setQuery(query, Resources.class).build();
+        // Create options, how we get query into adapter
+        FirestoreRecyclerOptions<Resources> options = new FirestoreRecyclerOptions.Builder<Resources>()
+                .setQuery(query, Resources.class).build();
 
-            // Assign adapter variable
-            adapter = new ResourceAdapter(options);
+        // Assign adapter variable
+        adapter = new ResourceAdapter(options);
 
-            // Create ref to recycler view
-            RecyclerView recyclerView = findViewById(R.id.ResourceRecycler);
-            recyclerView.setHasFixedSize(true); // for performance
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(adapter);
+        // Create ref to recycler view
+        RecyclerView recyclerView = findViewById(R.id.ResourceRecycler);
+        recyclerView.setHasFixedSize(true); // for performance
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
-            adapter.setOnItemClickListener((documentSnapshot, position) -> {
-                Resources resource = documentSnapshot.toObject(Resources.class);
-                String id = documentSnapshot.getId();
-                Log.d("CLICK","CLICKED" + id);
+        adapter.setOnItemClickListener((documentSnapshot, position) -> {
+            Resources resource = documentSnapshot.toObject(Resources.class);
+            String id = documentSnapshot.getId();
+            Log.d("CLICK","CLICKED" + id);
 
-                Intent i = new Intent(RecommendationsActivity.this, IndividualResource.class);
-                i.putExtra("id", id);
+            Intent i = new Intent(RecommendationsActivity.this, IndividualResource.class);
+            i.putExtra("id", id);
 
-                startActivity(i);
-            });
+            startActivity(i);
+        });
     }
 
     @Override
