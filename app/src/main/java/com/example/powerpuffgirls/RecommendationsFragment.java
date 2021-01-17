@@ -17,10 +17,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 // TODO: Add intent when click on resource and filter by user info on clicking filter btn
 
-public class RecommendationsActivity extends Fragment {
+public class RecommendationsFragment extends Fragment {
 
     //TAG
-    private String TAG = "RecommendationsActivity";
+    private String TAG = "RecommendationsFragment";
 
     // gets data
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -29,12 +29,12 @@ public class RecommendationsActivity extends Fragment {
     private RecyclerView recyclerView;
 
 
-    public RecommendationsActivity() {
+    public RecommendationsFragment() {
         // Required empty public constructor
     }
 
-    public static RecommendationsActivity newInstance() {
-        RecommendationsActivity fragment = new RecommendationsActivity();
+    public static RecommendationsFragment newInstance() {
+        RecommendationsFragment fragment = new RecommendationsFragment();
         return fragment;
     }
 
