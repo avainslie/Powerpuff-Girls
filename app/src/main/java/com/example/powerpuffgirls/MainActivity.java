@@ -1,4 +1,3 @@
-
 package com.example.powerpuffgirls;
 import com.example.powerpuffgirls.ui.login.LoginActivity;
 
@@ -33,4 +32,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
-
