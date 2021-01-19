@@ -8,35 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PowerPuffGirlsUser">
-        <activity
-            android:name="com.example.powerpuffgirls.UserProfileListActivity"
-            android:label="@string/title_userprofile_list"
-            android:theme="@style/Theme.PowerPuffGirlsUser.NoActionBar" />
-        <activity
-            android:name="com.example.powerpuffgirls.UserProfileDetailActivity"
-            android:label="@string/title_userprofile_detail"
-            android:parentActivityName="com.example.powerpuffgirls.UserProfileListActivity"
-            android:theme="@style/Theme.PowerPuffGirlsUser.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.powerpuffgirls.UserProfileListActivity" />
-        </activity>
-        <activity android:name="com.example.powerpuffgirls.CustomizationActivity" />
-        <activity android:name="com.example.powerpuffgirls.InterestsInfoActivity" />
-        <activity android:name="com.example.powerpuffgirls.EducationInfoActivity" />
-        <activity android:name="com.example.powerpuffgirls.SignUpActivity" />
-        <activity
-            android:name="com.example.powerpuffgirls.ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name="com.example.powerpuffgirls.MainActivity">
+        android:theme="@style/Theme.PowerpuffGirls">
+        <activity android:name=".IndividualResource"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.powerpuffgirls.AboutYouActivity" />
     </application>
 
 </manifest>
