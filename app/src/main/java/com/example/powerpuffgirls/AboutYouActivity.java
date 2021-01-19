@@ -18,7 +18,6 @@ public class AboutYouActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_you);
 
@@ -56,3 +55,4 @@ public class AboutYouActivity extends AppCompatActivity {
         }
     }
 }
+

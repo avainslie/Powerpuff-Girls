@@ -16,7 +16,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         FloatingActionButton buttonToAboutYou = (FloatingActionButton) findViewById(R.id.buttonToAboutYou);
         buttonToAboutYou.setOnClickListener(createProfileView->openAboutYouActivity());
-    //To be continued
+        //To be continued
         EditText passwordInput =findViewById(R.id.confirmPassword);
 
     }
@@ -30,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
         pC=String.valueOf(R.id.confirmPassword);
         String errorMessage= "Password does not match, please try again";
         if (p!=pC){
-             System.out.println(errorMessage);
+            System.out.println(errorMessage);
         }
     }
 
