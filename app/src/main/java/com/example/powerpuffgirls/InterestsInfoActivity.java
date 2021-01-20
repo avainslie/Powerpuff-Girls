@@ -19,7 +19,7 @@ public class InterestsInfoActivity extends AppCompatActivity {
 
     }
     public void openUserProfileActivity(){
-        Intent userProfileIntent=new Intent(this, UserProfileDetailActivity.class);
+        Intent userProfileIntent=new Intent(this, UserProfileActivity.class);
         startActivity(userProfileIntent);
     }
 }

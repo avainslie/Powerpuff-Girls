@@ -20,7 +20,8 @@ public class EducationInfoActivity extends AppCompatActivity {
     Spinner fieldOfStudySpinner;
     TextView studyOutputSpinnerSection;
     //options to be displayed in spinner
-    String[] fieldsOfStudy= {"Art", "Business", "Science", "Engineering"};
+    String[] fieldsOfStudy = {"Art", "Business", "Science", "Engineering"};
+
 
 
 
@@ -35,6 +36,10 @@ public class EducationInfoActivity extends AppCompatActivity {
         studentSpinner = findViewById(R.id.studentSpinnerButton);
         mOutputSpinnerSection = findViewById(R.id.outputSpinnerSection);
 
+        fieldOfStudySpinner=findViewById(R.id.fieldOfStudySpinnerButton);
+        studyOutputSpinnerSection=findViewById(R.id.fieldOfStudyTitle);
+
+
 
         //Creating the ArrayAdapter instance having the list of options
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, studentTypes);
@@ -42,6 +47,9 @@ public class EducationInfoActivity extends AppCompatActivity {
         //setting the ArrayAdapter data on the Spinner
         studentSpinner.setAdapter(aa);
 
+        ArrayAdapter fs = new ArrayAdapter(this, android.R.layout.simple_spinner_item, fieldsOfStudy);
+        fs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fieldOfStudySpinner.setAdapter(fs);
 
         //spinner item click handler
         studentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,6 +81,34 @@ public class EducationInfoActivity extends AppCompatActivity {
             }
         });
 
+        fieldOfStudySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //METHOD 1: Get text from selected item's position & set it to TextView
+                //mOutputSpinnerTv.setText(parent.getItemAtPosition(position).toString());
+
+                //METHOD 2: Get the position of item selected, & perform specific task
+                if (position == 0) {
+                    //mOutputSpinnerSection.setText("Undergraduate Student selected");
+
+                }
+                if (position == 1) {
+                    // mOutputSpinnerSection.setText("Graduate Student selected...");
+                }
+                if (position == 2) {
+                    // mOutputSpinnerSection.setText("High School Student selected...");
+                }
+                if (position == 3) {
+                    // mOutputSpinnerSection.setText("Mature Student is selected...");
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.powerpuffgirls.dummy.DummyContent;
 
 /**
- * A fragment representing a single UserProfile detail screen.
+ * A fragment representing a single UserProfileActivity detail screen.
  * This fragment is either contained in a {@link UserProfileListActivity}
  * in two-pane mode (on tablets) or a {@link UserProfileDetailActivity}
  * on handsets.
