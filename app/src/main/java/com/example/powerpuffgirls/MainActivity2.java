@@ -36,8 +36,8 @@ public class MainActivity2 extends AppCompatActivity {
                         openFragment(RecommendationsFragment.newInstance());
                         return true;
                     case R.id.user_icon:
-//                            openFragment(UserFragment.newInstance("", ""));
-//                            return true;
+                        openFragment(UserFragment.newInstance());
+                        return true;
                 }
                 return false;
             };

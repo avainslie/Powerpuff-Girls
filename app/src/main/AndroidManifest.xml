@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PowerpuffGirls">
-        <activity android:name=".UserProfileActivity"></activity>
         <activity android:name=".IndividualResource" />
         <activity android:name=".CustomizationActivity" />
         <activity android:name=".InterestsInfoActivity" />
         <activity android:name=".EducationInfoActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".AboutYouActivity" />
+        <activity android:name=".MainActivity2" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
