@@ -19,19 +19,19 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText sEmailAddress, sPassword;
-    FirebaseFirestore fstore;
-    FirebaseAuth fAuth;
-    String userID;
+    private EditText sEmailAddress, sPassword;
+    private FirebaseFirestore fstore;
+    private FirebaseAuth fAuth;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fstore=FirebaseFirestore.getInstance();
-        fAuth=FirebaseAuth.getInstance();
-
-        sEmailAddress = findViewById(R.id.emailAddress);
-        sPassword = findViewById(R.id.password);
+//        fAuth=FirebaseAuth.getInstance();
+//
+//        if(fAuth.getInstance().getCurrentUser() != null) {
+//        }
 
         setContentView(R.layout.activity_sign_up);
         FloatingActionButton buttonToAboutYou = (FloatingActionButton) findViewById(R.id.buttonToAboutYou);
@@ -41,9 +41,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
     public void openAboutYouActivity(){
+        sEmailAddress = findViewById(R.id.emailAddress);
+        sPassword = findViewById(R.id.password);
         registerFirstStep();
-        Intent aboutYouIntent=new Intent( this , AboutYouActivity.class);
-        startActivity(aboutYouIntent);
+//        Intent aboutYouIntent=new Intent( this , AboutYouActivity.class);
+//        startActivity(aboutYouIntent);
 
     }
 
@@ -58,12 +60,21 @@ public class SignUpActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             sPassword.setError("Password is Required");
         }
-        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((save) -> {
-            userID = fAuth.getCurrentUser().getUid();
-            DocumentReference documentReference = fstore.collection("Users").document(userID);
-            Map<String,Object> User=new HashMap<>();
-            User.put( "email", email);
-        });
+            //userID = fAuth.getCurrentUser().getUid();
+
+            //DocumentReference documentReference = fstore.collection("Users").document(userID);
+            Map<String, String> userMap =new HashMap<>();
+            userMap.put( "email", email);
+            fstore.collection("Users").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+
+                }
+            }
+
+            );
+            Intent aboutYouIntent=new Intent( this , AboutYouActivity.class);
+            startActivity(aboutYouIntent);
     }
 
         //To be continued
