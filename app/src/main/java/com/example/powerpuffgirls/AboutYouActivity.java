@@ -10,19 +10,27 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AboutYouActivity extends AppCompatActivity {
 
     private static final int RESULT_LOAD_IMAGE = 1;
+    private String ethnicity;
+    private RadioGroup radioGroup;
+    private RadioButton gender;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference usersRef = db.collection("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_you);
-
-
 
         Button uploadImage = (Button) findViewById(R.id.uploadImageButton);
         uploadImage.setOnClickListener(UploadImageView -> {
@@ -34,6 +42,25 @@ public class AboutYouActivity extends AppCompatActivity {
         toEducationInfo.setOnClickListener(EducationInfoView-> openEducationInfoActivity());
     }
     public void openEducationInfoActivity(){
+
+
+        radioGroup = (RadioGroup) findViewById(R.id.genderOptions);
+        // get selected radio button from radioGroup
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        gender = (RadioButton) findViewById(selectedId);
+
+
+
+//     TODO: Grab the id sent over by the previous activity
+//      String id = getIntent().getStringExtra("Document ID");
+
+
+//       TODO: this should send the gender to the newly created firestore doc of the previous activity. Just need the document ID
+//        doc userDoc = CollectionReference.document("insert ID of document here");
+//        userDoc.updateData({"Gender":gender});
+
+
         Intent educationInfoIntent= new Intent(this, EducationInfoActivity.class);
         startActivity(educationInfoIntent);
     }

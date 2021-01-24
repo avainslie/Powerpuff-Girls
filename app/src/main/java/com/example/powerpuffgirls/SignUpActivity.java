@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 import android.content.Intent;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -28,10 +30,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fstore=FirebaseFirestore.getInstance();
-//        fAuth=FirebaseAuth.getInstance();
-//
-//        if(fAuth.getInstance().getCurrentUser() != null) {
-//        }
 
         setContentView(R.layout.activity_sign_up);
         FloatingActionButton buttonToAboutYou = (FloatingActionButton) findViewById(R.id.buttonToAboutYou);
@@ -44,9 +42,6 @@ public class SignUpActivity extends AppCompatActivity {
         sEmailAddress = findViewById(R.id.emailAddress);
         sPassword = findViewById(R.id.password);
         registerFirstStep();
-//        Intent aboutYouIntent=new Intent( this , AboutYouActivity.class);
-//        startActivity(aboutYouIntent);
-
     }
 
     public void registerFirstStep() {
@@ -60,21 +55,27 @@ public class SignUpActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             sPassword.setError("Password is Required");
         }
-            //userID = fAuth.getCurrentUser().getUid();
 
-            //DocumentReference documentReference = fstore.collection("Users").document(userID);
             Map<String, String> userMap =new HashMap<>();
             userMap.put( "email", email);
             fstore.collection("Users").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
-
+                    Log.d("Success", "Success! user added w/email");
                 }
             }
 
             );
-            Intent aboutYouIntent=new Intent( this , AboutYouActivity.class);
+
+
+//            TODO: I think you can use a snapshot to get id, but how to get the snapshot idk
+//             DocumentSnapshot snapshot = new DocumentSnapshot();
+
+            Intent aboutYouIntent=new Intent(this , AboutYouActivity.class);
             startActivity(aboutYouIntent);
+
+//             TODO: Send ID of newly created document to the next activity
+//              aboutYouIntent.putExtra("Document ID",snapshot.getId());
     }
 
         //To be continued
