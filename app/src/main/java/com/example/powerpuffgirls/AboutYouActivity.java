@@ -23,7 +23,7 @@ public class AboutYouActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
     private String ethnicity;
     private RadioGroup radioGroup;
-    private RadioButton gender;
+    private RadioButton Gender;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference usersRef = db.collection("Users");
 
@@ -48,12 +48,14 @@ public class AboutYouActivity extends AppCompatActivity {
         // get selected radio button from radioGroup
         int selectedId = radioGroup.getCheckedRadioButtonId();
         // find the radiobutton by returned id
-        gender = (RadioButton) findViewById(selectedId);
+        Gender = (RadioButton) findViewById(selectedId);
+        String gender = Gender.toString();
 
 
 
 //     TODO: Grab the id sent over by the previous activity
 //      String id = getIntent().getStringExtra("Document ID");
+        String email = getIntent().getStringExtra("email");
 
 
 //       TODO: this should send the gender to the newly created firestore doc of the previous activity. Just need the document ID
@@ -63,6 +65,8 @@ public class AboutYouActivity extends AppCompatActivity {
 
         Intent educationInfoIntent= new Intent(this, EducationInfoActivity.class);
         startActivity(educationInfoIntent);
+        educationInfoIntent.putExtra("email",email);
+        educationInfoIntent.putExtra("gender",gender);
     }
 
 

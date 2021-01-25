@@ -115,7 +115,12 @@ public class EducationInfoActivity extends AppCompatActivity {
     }
 
     public void openInterestsActivity(){
+        String email = getIntent().getStringExtra("email");
+        String gender = getIntent().getStringExtra("gender");
         Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);
         startActivity(interestsIntent);
+        interestsIntent.putExtra("email",email);
+        interestsIntent.putExtra("gender",gender);
+        //interestsIntent.putExtra("interests?",interests);
     }
 }

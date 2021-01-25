@@ -73,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             Intent aboutYouIntent=new Intent(this , AboutYouActivity.class);
             startActivity(aboutYouIntent);
+            aboutYouIntent.putExtra("email",email);
 
 //             TODO: Send ID of newly created document to the next activity
 //              aboutYouIntent.putExtra("Document ID",snapshot.getId());
