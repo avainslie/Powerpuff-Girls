@@ -12,17 +12,27 @@ public class User {
     private int age;
     private Boolean internationalStudent;
     private List<String> interests; // = new ArrayList<String>();
+    private String email;
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 
     public User() {
     }
 
-    public User(String name, String degreeMajor, String degreeMinorOrConcentration, int age, Boolean internationalStudent, List<String> interests) {
+    public User(String name, String degreeMajor, String degreeMinorOrConcentration, int age,String email, Boolean internationalStudent, List<String> interests) {
         this.name = name;
         this.degreeMajor = degreeMajor;
         this.degreeMinorOrConcentration = degreeMinorOrConcentration;
         this.age = age;
         this.internationalStudent = internationalStudent;
         this.interests = interests;
+        this.email=email;
     }
 
     public User(String name, String degreeMajor) {

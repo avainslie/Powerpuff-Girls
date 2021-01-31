@@ -25,3 +25,4 @@ public class InterestsInfoActivity extends AppCompatActivity {
         startActivity(mainApp);
     }
 }
+

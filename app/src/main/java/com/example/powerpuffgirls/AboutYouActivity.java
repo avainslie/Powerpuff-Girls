@@ -1,26 +1,44 @@
 package com.example.powerpuffgirls;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AboutYouActivity extends AppCompatActivity {
 
     private static final int RESULT_LOAD_IMAGE = 1;
+    //private CheckBox sCaucasian, sAsian, sHispanic, sBlack, sMiddleEastern;
+    FirebaseFirestore fstore;
+    private FirebaseAuth fAuth;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_you);
+        fstore=FirebaseFirestore.getInstance();
+
 
 
 
@@ -33,7 +51,31 @@ public class AboutYouActivity extends AppCompatActivity {
         FloatingActionButton toEducationInfo= (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
         toEducationInfo.setOnClickListener(EducationInfoView-> openEducationInfoActivity());
     }
+
+
+
     public void openEducationInfoActivity(){
+        RadioGroup sGenderOptions = (RadioGroup) findViewById(R.id.genderOptions);
+        RadioGroup sEthnicityOptions=(RadioGroup) findViewById(R.id.ethnicityOptions);
+        int selectedGender = sGenderOptions.getCheckedRadioButtonId();
+        int selectedEthnicity = sEthnicityOptions.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        RadioButton genderButton = (RadioButton) findViewById(selectedGender);
+        String gender= genderButton.getText().toString().trim();
+        //Map<String, String> userMap =new HashMap<>();
+        SignUpActivity a= new SignUpActivity();
+        HashMap<String, String> map = a.getHashmap();
+        map.put("gender",gender);
+
+        //CheckBox ethnicityCheckbox=(CheckBox)findViewById(selectedEthnicity);
+        //String ethnicity =ethnicityCheckbox.getText().toString().trim();
+        //map.put("ethnicity",ethnicity);
+
+
+        CollectionReference data = fstore.collection("Users");
+        data.add(map);
+
+
         Intent educationInfoIntent= new Intent(this, EducationInfoActivity.class);
         startActivity(educationInfoIntent);
     }
