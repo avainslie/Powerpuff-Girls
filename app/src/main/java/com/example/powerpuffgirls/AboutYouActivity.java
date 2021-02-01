@@ -71,11 +71,6 @@ public class AboutYouActivity extends AppCompatActivity {
         //String ethnicity =ethnicityCheckbox.getText().toString().trim();
         //map.put("ethnicity",ethnicity);
 
-
-        CollectionReference data = fstore.collection("Users");
-        data.add(map);
-
-
         Intent educationInfoIntent= new Intent(this, EducationInfoActivity.class);
         startActivity(educationInfoIntent);
     }

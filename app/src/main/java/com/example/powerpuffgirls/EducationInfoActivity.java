@@ -4,21 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.*;
 import android.view.View;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class EducationInfoActivity extends AppCompatActivity {
 
+    FirebaseFirestore fstore;
+    private FirebaseAuth fAuth;
     Spinner studentSpinner;
     TextView mOutputSpinnerSection;
+    String studentType;
     //options to be displayed in spinner
     String[] studentTypes = {"Undergraduate Student", "Graduate Student", "High School Student", "Mature Student", "Diploma Student", "Certificate Student"};
 
     Spinner fieldOfStudySpinner;
     TextView studyOutputSpinnerSection;
+    String fieldOfStudy;
     //options to be displayed in spinner
     String[] fieldsOfStudy = {"Art", "Business", "Science", "Engineering"};
 
@@ -27,6 +37,7 @@ public class EducationInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        fstore=FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_education_info);
 
@@ -61,23 +72,35 @@ public class EducationInfoActivity extends AppCompatActivity {
                 //METHOD 2: Get the position of item selected, & perform specific task
                 if (position == 0) {
                     //mOutputSpinnerSection.setText("Undergraduate Student selected");
+                    studentType = "Undergraduate Student";
 
                 }
                 if (position == 1) {
                     // mOutputSpinnerSection.setText("Graduate Student selected...");
+                    studentType = "Graduate Student";
                 }
                 if (position == 2) {
                     // mOutputSpinnerSection.setText("High School Student selected...");
+                    studentType = "High School Student";
                 }
                 if (position == 3) {
                     // mOutputSpinnerSection.setText("Mature Student is selected...");
+                    studentType = "Mature Student";
+                }
+                if (position == 4) {
+                    // mOutputSpinnerSection.setText("Mature Student is selected...");
+                    studentType = "Diploma Student";
+                }
+                if (position == 5) {
+                    // mOutputSpinnerSection.setText("Mature Student is selected...");
+                    studentType = "Certificate Student";
                 }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                Toast.makeText(getApplicationContext(),"Please select a student type!",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -90,23 +113,25 @@ public class EducationInfoActivity extends AppCompatActivity {
                 //METHOD 2: Get the position of item selected, & perform specific task
                 if (position == 0) {
                     //mOutputSpinnerSection.setText("Undergraduate Student selected");
-
+                    fieldOfStudy = "Art";
                 }
                 if (position == 1) {
                     // mOutputSpinnerSection.setText("Graduate Student selected...");
+                    fieldOfStudy = "Business";
                 }
                 if (position == 2) {
                     // mOutputSpinnerSection.setText("High School Student selected...");
+                    fieldOfStudy = "Science";
                 }
                 if (position == 3) {
                     // mOutputSpinnerSection.setText("Mature Student is selected...");
+                    fieldOfStudy = "Engineering";
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                Toast.makeText(getApplicationContext(),"Please select a study area!",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -115,6 +140,18 @@ public class EducationInfoActivity extends AppCompatActivity {
     }
 
     public void openInterestsActivity(){
+
+        SignUpActivity a= new SignUpActivity();
+        HashMap<String, String> map = a.getHashmap();
+        map.put("studentType",studentType);
+
+        map.put("fieldOfStudy",fieldOfStudy);
+
+        CollectionReference data = fstore.collection("Users");
+        data.add(map);
+
+
+
         Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);
         startActivity(interestsIntent);
     }
