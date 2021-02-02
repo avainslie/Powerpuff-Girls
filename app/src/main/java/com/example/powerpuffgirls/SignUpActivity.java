@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
 //
 //        if(fAuth.getInstance().getCurrentUser() != null) {
 //        }
-        //newUser= new User();
+       
         setContentView(R.layout.activity_sign_up);
         FloatingActionButton buttonToAboutYou = (FloatingActionButton) findViewById(R.id.buttonToAboutYou);
         buttonToAboutYou.setOnClickListener(createProfileView->openAboutYouActivity());
@@ -73,9 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
             //userID = fAuth.getCurrentUser().getUid();
-
-
-           // userMap.put( "email", email);
+        
             userMap.put( "firstname", firstname);
             userMap.put( "lastname", lastname);
             userMap.put( "birthdate", birthdate);

@@ -140,12 +140,24 @@ public class EducationInfoActivity extends AppCompatActivity {
     }
 
     public void openInterestsActivity(){
+        RadioGroup sStudentStatus = (RadioGroup) findViewById(R.id.studentStatus);
+        RadioGroup sStudentResidency=(RadioGroup) findViewById(R.id.studentResidency);
+        int selectedStatus = sStudentStatus.getCheckedRadioButtonId();
+        int selectedResidency = sStudentResidency.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        RadioButton statusButton = (RadioButton) findViewById(selectedStatus);
+        String status= statusButton.getText().toString().trim();
+        RadioButton residencyButton=(RadioButton)findViewById(selectedResidency);
+        String residency=residencyButton.getText().toString().trim();
+        //Map<String, String> userMap =new HashMap<>();
 
         SignUpActivity a= new SignUpActivity();
         HashMap<String, String> map = a.getHashmap();
         map.put("studentType",studentType);
 
         map.put("fieldOfStudy",fieldOfStudy);
+        map.put("status",status);
+        map.put("residency",residency);
 
         CollectionReference data = fstore.collection("Users");
         data.add(map);
