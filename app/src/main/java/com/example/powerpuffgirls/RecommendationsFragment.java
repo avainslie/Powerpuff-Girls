@@ -33,6 +33,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
     private Button rbtn;
     private Button ebtn;
     private Button gbtn;
+    private Button filter;
     private View v;
 
 
@@ -57,6 +58,10 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
         rbtn.setOnClickListener(this);
         ebtn.setOnClickListener(this);
         gbtn.setOnClickListener(this);
+        filter.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Filter clicked", Toast.LENGTH_SHORT);
+            Log.d(TAG, "Hello World");
+        });
         return v;
     }
 
@@ -78,6 +83,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
         rbtn = v.findViewById(R.id.resourceButton);
         ebtn = v.findViewById(R.id.eventButton);
         gbtn = v.findViewById(R.id.groupButton);
+        filter = v.findViewById(R.id.filterButton);
     }
 
     private void setUpRecyclerView(){
