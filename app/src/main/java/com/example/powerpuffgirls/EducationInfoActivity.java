@@ -162,6 +162,12 @@ public class EducationInfoActivity extends AppCompatActivity {
         CollectionReference data = fstore.collection("Users");
         data.add(map);
 
+        ProfileImage pi = new ProfileImage();
+        if (pi.getImgbytes() != null){
+            data.add(pi.getImgbytes());
+        }
+
+
 
 
         Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);

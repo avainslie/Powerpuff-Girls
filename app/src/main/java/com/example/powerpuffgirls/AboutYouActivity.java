@@ -2,6 +2,7 @@ package com.example.powerpuffgirls;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,7 @@ public class AboutYouActivity extends AppCompatActivity {
     FirebaseFirestore fstore;
     private FirebaseAuth fAuth;
     private String userID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,10 +126,27 @@ public class AboutYouActivity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
+
             // String picturePath contains the path of selected Image
             ImageView imageView = (ImageView) findViewById(R.id.profilePicture);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            ProfileImage pi = new ProfileImage();
+            pi.setImgbytes(getByteArray(imageView));
+
         }
+    }
+
+    // https://stackoverflow.com/questions/48110832/android-send-imageview-image-to-firebase-with-authentication
+    public byte[] getByteArray(ImageView imageView){
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = imageView.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        return data;
     }
 
 

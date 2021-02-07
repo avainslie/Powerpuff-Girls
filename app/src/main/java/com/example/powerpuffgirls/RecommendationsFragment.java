@@ -33,6 +33,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
     private Button rbtn;
     private Button ebtn;
     private Button gbtn;
+    private String collectionPath;
     private Button filter;
     private View v;
 
@@ -48,8 +49,8 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        resourceRef = db.collection("Resources");
+        collectionPath = "Resources";
+        resourceRef = db.collection(collectionPath);
 
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.activity_recommendations, container, false);
@@ -107,7 +108,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
 
             Intent i = new Intent(getContext(), IndividualResource.class);
             i.putExtra("id", id);
-
+            i.putExtra("collectionPath", collectionPath);
             startActivity(i);
         });
     }
@@ -117,17 +118,20 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.resourceButton:
-                resourceRef = db.collection("Resources");
+                collectionPath = "Resources";
+                resourceRef = db.collection(collectionPath);
                 setUpRecyclerView();
                 adapter.startListening();
                 break;
             case R.id.eventButton:
-                resourceRef = db.collection("Upcoming Events");
+                collectionPath = "Upcoming Events";
+                resourceRef = db.collection(collectionPath);
                 setUpRecyclerView();
                 adapter.startListening();
                 break;
             case R.id.groupButton:
-                resourceRef = db.collection("Community Groups");
+                collectionPath = "Community Groups";
+                resourceRef = db.collection(collectionPath);
                 setUpRecyclerView();
                 adapter.startListening();
                 break;
