@@ -149,7 +149,7 @@ public class EducationInfoActivity extends AppCompatActivity {
         String status= statusButton.getText().toString().trim();
         RadioButton residencyButton=(RadioButton)findViewById(selectedResidency);
         String residency=residencyButton.getText().toString().trim();
-        //Map<String, String> userMap =new HashMap<>();
+
 
         SignUpActivity a= new SignUpActivity();
         HashMap<String, String> map = a.getHashmap();
