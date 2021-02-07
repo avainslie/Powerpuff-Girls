@@ -1,6 +1,7 @@
 package com.example.powerpuffgirls;
 import com.example.powerpuffgirls.ui.login.LoginActivity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button logIn = findViewById(R.id.logInButton);
         logIn.setOnClickListener(logInView -> openLogInActivity());
+//        ActionBar actionBar = getSupportActionBar();
+//        //actionBar.setTitle(getString(R.string.titolo));
+//        actionBar.setIcon(R.drawable.comeuptrans);
+//        actionBar.setDisplayShowHomeEnabled(true);
     }
 
     public void openLogInActivity() {
