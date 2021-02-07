@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,16 +19,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 // TODO: Add intent when click on resource and filter by user info on clicking filter btn
 
-public class RecommendationsFragment extends Fragment {
+public class RecommendationsFragment extends Fragment implements View.OnClickListener{
 
     //TAG
     private String TAG = "RecommendationsFragment";
 
     // gets data
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference resourceRef = db.collection("Resources");
+    //private CollectionReference resourceRef = db.collection("Resources");
+    private CollectionReference resourceRef;
     private ResourceAdapter adapter;
     private RecyclerView recyclerView;
+    private Button rbtn;
+    private Button ebtn;
+    private Button gbtn;
+    private View v;
 
 
     public RecommendationsFragment() {
@@ -40,9 +47,16 @@ public class RecommendationsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        resourceRef = db.collection("Resources");
+
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.activity_recommendations, container, false);
+        v = inflater.inflate(R.layout.activity_recommendations, container, false);
         setViews(v);
+
+        rbtn.setOnClickListener(this);
+        ebtn.setOnClickListener(this);
+        gbtn.setOnClickListener(this);
         return v;
     }
 
@@ -61,6 +75,9 @@ public class RecommendationsFragment extends Fragment {
 
     public void setViews(View v) {
         recyclerView = v.findViewById(R.id.ResourceRecycler);
+        rbtn = v.findViewById(R.id.resourceButton);
+        ebtn = v.findViewById(R.id.eventButton);
+        gbtn = v.findViewById(R.id.groupButton);
     }
 
     private void setUpRecyclerView(){
@@ -89,4 +106,25 @@ public class RecommendationsFragment extends Fragment {
         });
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.resourceButton:
+                resourceRef = db.collection("Resources");
+                setUpRecyclerView();
+                adapter.startListening();
+                break;
+            case R.id.eventButton:
+                resourceRef = db.collection("Upcoming Events");
+                setUpRecyclerView();
+                adapter.startListening();
+                break;
+            case R.id.groupButton:
+                resourceRef = db.collection("Community Groups");
+                setUpRecyclerView();
+                adapter.startListening();
+                break;
+        }
+    }
 }
