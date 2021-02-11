@@ -44,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
     public void openAboutYouActivity(){
         sEmailAddress = findViewById(R.id.emailAddress);
+
         sPassword = findViewById(R.id.password);
         sFirstname=findViewById(R.id.firstname);
         sLastname=findViewById(R.id.lastname);
@@ -80,6 +81,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 
             Intent aboutYouIntent=new Intent( this , AboutYouActivity.class);
+            aboutYouIntent.putExtra("message_key", firstname);
+            aboutYouIntent.putExtra("message_key", lastname);
             startActivity(aboutYouIntent);
     }
 

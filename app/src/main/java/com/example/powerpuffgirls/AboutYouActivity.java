@@ -53,6 +53,7 @@ public class AboutYouActivity extends AppCompatActivity {
         FloatingActionButton toEducationInfo= (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
         toEducationInfo.setOnClickListener(EducationInfoView-> openEducationInfoActivity());
 
+
     }
     //Ethnicities
 

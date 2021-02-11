@@ -168,8 +168,6 @@ public class EducationInfoActivity extends AppCompatActivity {
         }
 
 
-
-
         Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);
         startActivity(interestsIntent);
     }
