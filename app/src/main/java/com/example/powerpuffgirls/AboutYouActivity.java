@@ -29,23 +29,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-    //private CheckBox sCaucasian, sAsian, sHispanic, sBlack, sMiddleEastern;
-    //FirebaseFirestore fstore;
 
     public class AboutYouActivity extends AppCompatActivity {
 
         private static final int RESULT_LOAD_IMAGE = 1;
-    private FirebaseAuth fAuth;
-    private String userID;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_you);
-        FirebaseFirestore fstore = FirebaseFirestore.getInstance();
 
-        Button uploadImage = (Button) findViewById(R.id.uploadImageButton);
+        Button uploadImage = findViewById(R.id.uploadImageButton);
         uploadImage.setOnClickListener(UploadImageView -> {
             Intent i = new Intent(
                     Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -56,22 +50,17 @@ import java.util.Map;
 
 
     }
-    //Ethnicities
-
-
-
-
 
     public void openEducationInfoActivity(){
-        CheckBox caucasian= (CheckBox) findViewById(R.id.caucasian);
-        CheckBox asian= (CheckBox) findViewById(R.id.asian);
-        CheckBox hispanic= (CheckBox) findViewById(R.id.hispanic);
-        CheckBox black= (CheckBox) findViewById(R.id.black);
-        CheckBox middleEastern= (CheckBox) findViewById(R.id.middleeastern);
-        CheckBox otherEthnicity= (CheckBox) findViewById(R.id.otherEthnicity);
+        CheckBox caucasian= findViewById(R.id.caucasian);
+        CheckBox asian=  findViewById(R.id.asian);
+        CheckBox hispanic=  findViewById(R.id.hispanic);
+        CheckBox black=  findViewById(R.id.black);
+        CheckBox middleEastern=  findViewById(R.id.middleeastern);
+        CheckBox otherEthnicity= findViewById(R.id.otherEthnicity);
         List ethnicities=new ArrayList<>();
-        RadioGroup sGenderOptions = (RadioGroup) findViewById(R.id.genderOptions);
-        RadioGroup sEthnicityOptions=(RadioGroup) findViewById(R.id.ethnicityOptions);
+        RadioGroup sGenderOptions =  findViewById(R.id.genderOptions);
+        RadioGroup sEthnicityOptions= findViewById(R.id.ethnicityOptions);
         int selectedGender = sGenderOptions.getCheckedRadioButtonId();
         if (caucasian.isChecked()){
             String ethnicity=caucasian.getText().toString().trim();
@@ -96,21 +85,14 @@ import java.util.Map;
 
 
         // find the radiobutton by returned id
-        RadioButton genderButton = (RadioButton) findViewById(selectedGender);
-        //CheckBox ethnicityCheckbox=(CheckBox) findViewById(selectedEthnicity);
+        RadioButton genderButton = findViewById(selectedGender);
+
         String gender= genderButton.getText().toString().trim();
-        //String ethnicity=ethnicityCheckbox.getText().toString().trim();
-        //Map<String, String> userMap =new HashMap<>();
+
         SignUpActivity a= new SignUpActivity();
         HashMap<String, String> map = a.getHashmap();
         map.put("gender",gender);
         map.put("ethnicity",ethnicities.toString());
-
-        //CheckBox ethnicityCheckbox=(CheckBox)findViewById(selectedEthnicity);
-        //String ethnicity =ethnicityCheckbox.getText().toString().trim();
-        //map.put("ethnicity",ethnicity);
-        
-
 
         Intent educationInfoIntent= new Intent(this, EducationInfoActivity.class);
         startActivity(educationInfoIntent);
