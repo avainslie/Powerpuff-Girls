@@ -10,33 +10,27 @@
         android:id="@+id/interestsTitle"
         android:layout_width="249dp"
         android:layout_height="32dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginBottom="615dp"
         android:text="@string/tell_us"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonToUserProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="327dp"
-        android:layout_marginLeft="327dp"
-        android:layout_marginTop="621dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginBottom="54dp"
         android:clickable="true"
         android:focusable="auto"
         android:rotation="90"
         android:rotationX="-2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.912"
         app:srcCompat="@android:drawable/arrow_up_float" />
 </androidx.constraintlayout.widget.ConstraintLayout>

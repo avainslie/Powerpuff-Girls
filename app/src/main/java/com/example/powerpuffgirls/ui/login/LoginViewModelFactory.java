@@ -23,4 +23,7 @@ public class LoginViewModelFactory implements ViewModelProvider.Factory {
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
+
+    public static class FilterActivity {
+    }
 }

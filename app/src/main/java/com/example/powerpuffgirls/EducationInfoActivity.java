@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 public class EducationInfoActivity extends AppCompatActivity {
 
+    private String TAG = "EducationInfoActivity";
     FirebaseFirestore fstore;
     private FirebaseAuth fAuth;
     Spinner studentSpinner;
@@ -145,26 +146,29 @@ public class EducationInfoActivity extends AppCompatActivity {
         int selectedStatus = sStudentStatus.getCheckedRadioButtonId();
         int selectedResidency = sStudentResidency.getCheckedRadioButtonId();
         // find the radiobutton by returned id
-        RadioButton statusButton = (RadioButton) findViewById(selectedStatus);
-        String status= statusButton.getText().toString().trim();
-        RadioButton residencyButton=(RadioButton)findViewById(selectedResidency);
-        String residency=residencyButton.getText().toString().trim();
+        try{
+            RadioButton statusButton = (RadioButton) findViewById(selectedStatus);
+            String status = statusButton.getText().toString().trim();
+            RadioButton residencyButton = (RadioButton) findViewById(selectedResidency);
+            String residency = residencyButton.getText().toString().trim();
 
 
-        SignUpActivity a= new SignUpActivity();
-        HashMap<String, String> map = a.getHashmap();
-        map.put("studentType",studentType);
+            SignUpActivity a = new SignUpActivity();
+            HashMap<String, String> map = a.getHashmap();
+            map.put("studentType", studentType);
 
-        map.put("fieldOfStudy",fieldOfStudy);
-        map.put("status",status);
-        map.put("residency",residency);
+            map.put("fieldOfStudy", fieldOfStudy);
+            map.put("status", status);
+            map.put("residency", residency);
 
-        CollectionReference data = fstore.collection("Users");
-        data.add(map);
+            CollectionReference data = fstore.collection("Users");
+            data.add(map);
 
-
-
-        Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);
-        startActivity(interestsIntent);
+            Intent interestsIntent = new Intent(this, InterestsInfoActivity.class);
+            startActivity(interestsIntent);
+        }catch (Exception e) {
+            Log.d(TAG, String.valueOf(e));
+            Toast.makeText(getApplicationContext(), "Please ensure all fields are filled out", Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -3,6 +3,8 @@ package com.example.powerpuffgirls;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,10 +14,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import org.w3c.dom.Text;
+public class ResourceAdapter extends FirestoreRecyclerAdapter<Resources, ResourceAdapter.ResourceHolder> implements Filterable {
 
-public class ResourceAdapter extends FirestoreRecyclerAdapter<Resources, ResourceAdapter.ResourceHolder> {
-
+    private String TAG = "resourceAdapter";
     private OnItemClickListener listener;
 
     public ResourceAdapter(@NonNull FirestoreRecyclerOptions<Resources> options) {
@@ -46,6 +47,11 @@ public class ResourceAdapter extends FirestoreRecyclerAdapter<Resources, Resourc
     public ResourceHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_single, parent, false);
         return new ResourceHolder(v);
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 
     /**

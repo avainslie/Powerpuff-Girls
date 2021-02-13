@@ -18,6 +18,5 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.PowerpuffGirls.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="Theme.PowerpuffGirls.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

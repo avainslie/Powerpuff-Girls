@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +30,7 @@ import java.util.Map;
 
 public class AboutYouActivity extends AppCompatActivity {
 
+    private String TAG = "AboutYouActivity";
     private static final int RESULT_LOAD_IMAGE = 1;
     //private CheckBox sCaucasian, sAsian, sHispanic, sBlack, sMiddleEastern;
     FirebaseFirestore fstore;
@@ -47,9 +49,8 @@ public class AboutYouActivity extends AppCompatActivity {
                     Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, RESULT_LOAD_IMAGE);
         });
-        FloatingActionButton toEducationInfo= (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
-        toEducationInfo.setOnClickListener(EducationInfoView-> openEducationInfoActivity());
-
+            FloatingActionButton toEducationInfo = (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
+            toEducationInfo.setOnClickListener(EducationInfoView -> openEducationInfoActivity());
     }
     //Ethnicities
 
@@ -57,7 +58,7 @@ public class AboutYouActivity extends AppCompatActivity {
 
 
 
-    public void openEducationInfoActivity(){
+    public void openEducationInfoActivity() {
         CheckBox caucasian= (CheckBox) findViewById(R.id.caucasian);
         CheckBox asian= (CheckBox) findViewById(R.id.asian);
         CheckBox hispanic= (CheckBox) findViewById(R.id.hispanic);
@@ -89,26 +90,28 @@ public class AboutYouActivity extends AppCompatActivity {
         }
 
 
+        try {
+            // find the radiobutton by returned id
+            RadioButton genderButton = (RadioButton) findViewById(selectedGender);
+            //CheckBox ethnicityCheckbox=(CheckBox) findViewById(selectedEthnicity);
+            String gender = genderButton.getText().toString().trim();
+            //String ethnicity=ethnicityCheckbox.getText().toString().trim();
+            //Map<String, String> userMap =new HashMap<>();
+            SignUpActivity a = new SignUpActivity();
+            HashMap<String, String> map = a.getHashmap();
+            map.put("gender", gender);
+            map.put("ethnicity", ethnicities.toString());
 
-        // find the radiobutton by returned id
-        RadioButton genderButton = (RadioButton) findViewById(selectedGender);
-        //CheckBox ethnicityCheckbox=(CheckBox) findViewById(selectedEthnicity);
-        String gender= genderButton.getText().toString().trim();
-        //String ethnicity=ethnicityCheckbox.getText().toString().trim();
-        //Map<String, String> userMap =new HashMap<>();
-        SignUpActivity a= new SignUpActivity();
-        HashMap<String, String> map = a.getHashmap();
-        map.put("gender",gender);
-        map.put("ethnicity",ethnicities.toString());
+            //CheckBox ethnicityCheckbox=(CheckBox)findViewById(selectedEthnicity);
+            //String ethnicity =ethnicityCheckbox.getText().toString().trim();
+            //map.put("ethnicity",ethnicity);
 
-        //CheckBox ethnicityCheckbox=(CheckBox)findViewById(selectedEthnicity);
-        //String ethnicity =ethnicityCheckbox.getText().toString().trim();
-        //map.put("ethnicity",ethnicity);
-        
-
-
-        Intent educationInfoIntent= new Intent(this, EducationInfoActivity.class);
-        startActivity(educationInfoIntent);
+            Intent educationInfoIntent = new Intent(this, EducationInfoActivity.class);
+            startActivity(educationInfoIntent);
+        }catch (Exception e) {
+            Log.d(TAG, String.valueOf(e));
+            Toast.makeText(getApplicationContext(), "Please ensure all fields are filled out", Toast.LENGTH_LONG).show();
+        }
     }
 
 

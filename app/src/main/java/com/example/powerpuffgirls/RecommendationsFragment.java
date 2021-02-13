@@ -10,30 +10,35 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.powerpuffgirls.ui.login.FilterFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+import java.util.ArrayList;
 
 // TODO: Add intent when click on resource and filter by user info on clicking filter btn
 
-public class RecommendationsFragment extends Fragment implements View.OnClickListener{
+public class RecommendationsFragment extends Fragment implements View.OnClickListener, FilterFragment.FilterDialogListener {
 
     //TAG
     private String TAG = "RecommendationsFragment";
 
     // gets data
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    //private CollectionReference resourceRef = db.collection("Resources");
-    private CollectionReference resourceRef;
+    private ArrayList<String> filterBy;
+    private Query resourceRef;
     private ResourceAdapter adapter;
     private RecyclerView recyclerView;
     private Button rbtn;
     private Button ebtn;
     private Button gbtn;
     private Button filter;
+    private String currentView = "Resources";
     private View v;
 
 
@@ -49,7 +54,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        resourceRef = db.collection("Resources");
+        resourceRef = db.collection(currentView);
 
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.activity_recommendations, container, false);
@@ -59,8 +64,13 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
         ebtn.setOnClickListener(this);
         gbtn.setOnClickListener(this);
         filter.setOnClickListener(v -> {
+            //Create filter popup menu
+            //Selected will be added to array
+            //Array returned and used as filters for firebase calls
+            //refresh recycler
             Toast.makeText(getContext(), "Filter clicked", Toast.LENGTH_SHORT);
             Log.d(TAG, "Hello World");
+            showFilterDialog();
         });
         return v;
     }
@@ -112,25 +122,51 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
         });
     }
 
+    public void refreshRecycler() {
+        resourceRef = db.collection(currentView).whereArrayContainsAny("filter_tags", filterBy);
+        Log.d(TAG, resourceRef.toString());
+        setUpRecyclerView();
+        adapter.startListening();
+        Log.d(TAG, "Showing filtered resources");
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.resourceButton:
-                resourceRef = db.collection("Resources");
+                currentView = "Resources";
+                resourceRef = db.collection(currentView);
                 setUpRecyclerView();
                 adapter.startListening();
                 break;
             case R.id.eventButton:
-                resourceRef = db.collection("Upcoming Events");
+                currentView = "Upcoming Events";
+                resourceRef = db.collection(currentView);
                 setUpRecyclerView();
                 adapter.startListening();
                 break;
             case R.id.groupButton:
-                resourceRef = db.collection("Community Groups");
+                currentView = "Community Groups";
+                resourceRef = db.collection(currentView);
                 setUpRecyclerView();
                 adapter.startListening();
                 break;
         }
     }
+
+    private void showFilterDialog() {
+        FragmentManager fm = getFragmentManager();
+        FilterFragment filterFragment = FilterFragment.newInstance("Some Title");
+        // SETS the target fragment for use later when sending results
+        filterFragment.setTargetFragment(RecommendationsFragment.this, 300);
+        filterFragment.show(fm, "fragment_filter");
+    }
+
+    @Override
+    public void onFinishSelectingDialog(ArrayList<String> filterChoices) {
+        filterBy = filterChoices;
+        Log.d(TAG, filterBy.toString());
+        refreshRecycler();
+    }
+
 }
