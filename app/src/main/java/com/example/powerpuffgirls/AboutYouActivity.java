@@ -22,18 +22,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.*;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-public class AboutYouActivity extends AppCompatActivity {
-
-    private static final int RESULT_LOAD_IMAGE = 1;
     //private CheckBox sCaucasian, sAsian, sHispanic, sBlack, sMiddleEastern;
-    FirebaseFirestore fstore;
+    //FirebaseFirestore fstore;
+
+    public class AboutYouActivity extends AppCompatActivity {
+
+        private static final int RESULT_LOAD_IMAGE = 1;
     private FirebaseAuth fAuth;
     private String userID;
 
@@ -42,7 +43,7 @@ public class AboutYouActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_you);
-        fstore=FirebaseFirestore.getInstance();
+        FirebaseFirestore fstore = FirebaseFirestore.getInstance();
 
         Button uploadImage = (Button) findViewById(R.id.uploadImageButton);
         uploadImage.setOnClickListener(UploadImageView -> {

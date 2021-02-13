@@ -159,14 +159,6 @@ public class EducationInfoActivity extends AppCompatActivity {
         map.put("status",status);
         map.put("residency",residency);
 
-        CollectionReference data = fstore.collection("Users");
-        data.add(map);
-
-        ProfileImage pi = new ProfileImage();
-        if (pi.getImgbytes() != null){
-            data.add(pi.getImgbytes());
-        }
-
 
         Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);
         startActivity(interestsIntent);
