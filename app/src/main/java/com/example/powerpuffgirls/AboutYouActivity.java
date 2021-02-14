@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,8 +24,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.*;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,21 +44,22 @@ import java.util.Map;
         setContentView(R.layout.activity_about_you);
 
         Button uploadImage = findViewById(R.id.uploadImageButton);
+
         uploadImage.setOnClickListener(UploadImageView -> {
             Intent i = new Intent(
+                    // Open the gallery
                     Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            // Arguments are the intent and a response code
             startActivityForResult(i, RESULT_LOAD_IMAGE);
         });
-        FloatingActionButton toEducationInfo= (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
+        FloatingActionButton toEducationInfo= findViewById(R.id.buttonToEducationInfo);
         toEducationInfo.setOnClickListener(EducationInfoView-> openEducationInfoActivity());
-
-
     }
 
     public void openEducationInfoActivity(){
         CheckBox caucasian= findViewById(R.id.caucasian);
         CheckBox asian=  findViewById(R.id.asian);
-        CheckBox hispanic=  findViewById(R.id.hispanic);
+        CheckBox hispanic= findViewById(R.id.hispanic);
         CheckBox black=  findViewById(R.id.black);
         CheckBox middleEastern=  findViewById(R.id.middleeastern);
         CheckBox otherEthnicity= findViewById(R.id.otherEthnicity);
@@ -82,8 +87,6 @@ import java.util.Map;
             ethnicities.add(ethnicity);
         }
 
-
-
         // find the radiobutton by returned id
         RadioButton genderButton = findViewById(selectedGender);
 
@@ -99,25 +102,35 @@ import java.util.Map;
     }
 
 
+    // Should be called after the gallery is closed and we return to the AboutYouActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+        Log.d("PIC","before the if, in onActivityResult");
+
+        // Detects response codes
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
+            Log.d("PIC", "picture selected, data not null");
+
             Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
 
-            // String picturePath contains the path of selected Image
-            ImageView imageView = (ImageView) findViewById(R.id.profilePicture);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
 
-            ProfileImage pi = new ProfileImage();
-            pi.setImgbytes(getByteArray(imageView));
+                ImageView imgView = findViewById(R.id.profilePicture);
 
+                Picasso.get().load(selectedImage).into(imgView);
+
+                ProfileImage pi = new ProfileImage();
+                pi.setImgUri(selectedImage);
+
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 
