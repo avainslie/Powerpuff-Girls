@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.powerpuffgirls">
+    send_button.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v)
+    {
+
+    // get the value which input by user in EditText
+    // and convert it to string
+    String str = send_text.getText().toString();
+
+    // Create the Intent object of this class Context() to Second_activity class
+    Intent intent = new Intent(getApplicationContext(), Second_activity.class);
+
+    // now by putExtra method put the value in key, value pair
+    // key is message_key by this key we will receive the value, and put the string
+
+    intent.putExtra("message_key", str);
+
+    // start the Intent
+    startActivity(intent);
+    }
 
     <application
         android:allowBackup="true"

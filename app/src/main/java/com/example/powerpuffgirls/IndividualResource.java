@@ -40,8 +40,10 @@ public class IndividualResource extends AppCompatActivity {
     public void setupTextViews() {
 
         String id = getIntent().getStringExtra("id");
+        String collectionPath = getIntent().getStringExtra("collectionPath");
+
         Log.d("New", "The id clicked is: " + id);
-        DocumentReference docRef = db.collection("Resources").document(id);
+        DocumentReference docRef = db.collection(collectionPath).document(id);
         Log.d("docRef", docRef.getId());
 
         docRef.get().addOnCompleteListener(task -> {
