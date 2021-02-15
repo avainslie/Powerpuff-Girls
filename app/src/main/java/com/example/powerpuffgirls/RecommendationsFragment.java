@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -37,7 +40,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
     private Button rbtn;
     private Button ebtn;
     private Button gbtn;
-    private Button filter;
+    private ImageButton filter;
     private String currentView = "Resources";
     private View v;
 
@@ -73,7 +76,10 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
             showFilterDialog();
         });
         return v;
+
+
     }
+
 
     @Override
     public void onStart() {
