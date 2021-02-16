@@ -7,84 +7,52 @@
     tools:context=".EducationInfoActivity">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/buttonToInterests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="auto"
-        android:rotation="90"
-        android:rotationX="-2"
-        app:backgroundTint="@color/electric_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/educationInfoTitle"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
+
+        android:text="Tell Us About your Education"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/outputSpinnerSection"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/outputSpinnerSection"
+        android:layout_width="295dp"
+        android:layout_height="27dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="  I am a/an.... "
+        app:layout_constraintBottom_toTopOf="@id/studentSpinnerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/educationInfoTitle" />
 
     <Spinner
         android:id="@+id/studentSpinnerButton"
         android:layout_width="296dp"
         android:layout_height="28dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="492dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/studentStatus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373"></Spinner>
-
-    <TextView
-        android:id="@+id/fieldOfStudyTitle"
-        android:layout_width="238dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="292dp"
-        android:layout_marginEnd="165dp"
-        android:layout_marginRight="165dp"
-        android:layout_marginBottom="284dp"
-        android:text="Field of Study"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Spinner
-        android:id="@+id/fieldOfStudySpinnerButton"
-        android:layout_width="288dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="324dp"
-        android:layout_marginBottom="236dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.406"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"></Spinner>
+        app:layout_constraintTop_toBottomOf="@id/outputSpinnerSection" />
 
     <RadioGroup
         android:id="@+id/studentStatus"
         android:layout_width="310dp"
         android:layout_height="70dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginBottom="404dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fieldOfStudyTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/studentSpinnerButton">
 
         <RadioButton
             android:id="@+id/partTime"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="35dp"
             android:text="Part-Time Student" />
 
         <RadioButton
@@ -95,17 +63,34 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/fieldOfStudyTitle"
+        android:layout_width="238dp"
+        android:layout_height="25dp"
+        android:text="Field of Study"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/fieldOfStudySpinnerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/studentStatus" />
+
+    <Spinner
+        android:id="@+id/fieldOfStudySpinnerButton"
+        android:layout_width="288dp"
+        android:layout_height="37dp"
+        app:layout_constraintBottom_toTopOf="@id/studentResidency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fieldOfStudyTitle" />
+
     <RadioGroup
         android:id="@+id/studentResidency"
         android:layout_width="308dp"
         android:layout_height="70dp"
-        android:layout_marginTop="214dp"
-        android:layout_marginBottom="316dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonToInterests"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/fieldOfStudySpinnerButton">
 
         <RadioButton
             android:id="@+id/canadian"
@@ -120,38 +105,22 @@
             android:text="International Student" />
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/outputSpinnerSection"
-        android:layout_width="295dp"
-        android:layout_height="27dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginBottom="605dp"
-        android:text="  I am a/an.... "
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonToInterests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="auto"
+        android:rotation="90"
+        android:rotationX="-2"
+        app:backgroundTint="@color/electric_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/educationInfoTitle"
-        android:layout_width="250dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginBottom="652dp"
-        android:text="Tell Us About your Education"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951"
+        app:srcCompat="@android:drawable/arrow_up_float" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

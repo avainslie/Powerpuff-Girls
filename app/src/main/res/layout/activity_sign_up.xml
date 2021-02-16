@@ -6,99 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
-    <EditText
-        android:id="@+id/emailAddress"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="318dp"
-        android:layout_marginBottom="372dp"
-        android:ems="10"
-        android:hint="@string/email_address"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/birthDate"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="266dp"
-        android:layout_marginBottom="424dp"
-        android:ems="10"
-        android:hint="Birthdate (DD/MM/YYYY)"
-        android:inputType="date"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/confirmPassword"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="97dp"
-        android:layout_marginLeft="97dp"
-        android:layout_marginTop="422dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginRight="99dp"
-        android:layout_marginBottom="268dp"
-        android:ems="10"
-        android:hint="@string/confirm_password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/firstname"
+            android:layout_width="252dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="@string/firstname"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@id/lastname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/lastname"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="209dp"
-        android:layout_marginBottom="481dp"
-        android:ems="10"
-        android:hint="@string/lastname"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="252dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="@string/lastname"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@id/birthDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstname" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="370dp"
-        android:layout_marginBottom="320dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/birthDate"
+            android:layout_width="252dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="Birthdate (DD/MM/YYYY)"
+            android:inputType="date"
+            app:layout_constraintBottom_toTopOf="@id/lastname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailAddress" />
 
-    <EditText
-        android:id="@+id/firstname"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="154dp"
-        android:layout_marginBottom="536dp"
-        android:ems="10"
-        android:hint="@string/firstname"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/emailAddress"
+            android:layout_width="252dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@id/password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/birthDate" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="252dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@id/confirmPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailAddress" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="252dp"
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonToAboutYou"
@@ -111,10 +101,10 @@
         app:backgroundTint="@color/electric_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912"
+        app:layout_constraintVertical_bias="0.951"
         app:srcCompat="@android:drawable/arrow_up_float" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
