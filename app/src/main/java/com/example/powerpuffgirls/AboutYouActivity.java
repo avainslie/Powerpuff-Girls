@@ -2,6 +2,7 @@ package com.example.powerpuffgirls;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -92,21 +93,20 @@ public class AboutYouActivity extends AppCompatActivity {
 
         // find the radiobutton by returned id
         RadioButton genderButton = findViewById(selectedGender);
+        try{
+            String gender= genderButton.getText().toString().trim();
 
-        String gender= genderButton.getText().toString().trim();
-
-        SignUpActivity a= new SignUpActivity();
-        HashMap<String, String> map = a.getHashmap();
-        map.put("gender",gender);
-        map.put("ethnicity",ethnicities.toString());
-
+            SignUpActivity a= new SignUpActivity();
+            HashMap<String, String> map = a.getHashmap();
+            map.put("gender",gender);
+            map.put("ethnicity",ethnicities.toString());
             //CheckBox ethnicityCheckbox=(CheckBox)findViewById(selectedEthnicity);
             //String ethnicity =ethnicityCheckbox.getText().toString().trim();
             //map.put("ethnicity",ethnicity);
 
             Intent educationInfoIntent = new Intent(this, EducationInfoActivity.class);
             startActivity(educationInfoIntent);
-        }catch (Exception e) {
+        }catch(Exception e) {
             Log.d(TAG, String.valueOf(e));
             Toast.makeText(getApplicationContext(), "Please ensure all fields are filled out", Toast.LENGTH_LONG).show();
         }
@@ -131,9 +131,18 @@ public class AboutYouActivity extends AppCompatActivity {
 
             ProfileImage pi = new ProfileImage();
             pi.setImgbytes(getByteArray(imageView));
-
         }
     }
 
-
+    // https://stackoverflow.com/questions/48110832/android-send-imageview-image-to-firebase-with-authentication
+    public byte[] getByteArray(ImageView imageView){
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = imageView.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        return data;
+    }
 }

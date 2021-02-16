@@ -165,7 +165,9 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
         FilterFragment filterFragment = FilterFragment.newInstance("Some Title");
         // SETS the target fragment for use later when sending results
         filterFragment.setTargetFragment(RecommendationsFragment.this, 300);
+        filterFragment.setCancelable(true);
         filterFragment.show(fm, "fragment_filter");
+
     }
 
     @Override

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.powerpuffgirls.ui.login.ActivityFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -46,6 +47,9 @@ public class MainActivity2 extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.home_icon:
                         openFragment(HomeFragment.newInstance());
+                        return true;
+                    case R.id.activity_icon:
+                        openFragment(ActivityFragment.newInstance());
                         return true;
                     case R.id.resources_icon:
                         openFragment(RecommendationsFragment.newInstance());

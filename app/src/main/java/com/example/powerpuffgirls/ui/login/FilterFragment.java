@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -127,9 +128,14 @@ public class FilterFragment extends DialogFragment{
     // Call this method to send the data back to the parent fragment
     public void sendBackResult() {
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
-        FilterDialogListener listener = (FilterDialogListener) getTargetFragment();
-        listener.onFinishSelectingDialog(filterBy);
-        dismiss();
+        if (filterBy.size() > 0) {
+            FilterDialogListener listener = (FilterDialogListener) getTargetFragment();
+            assert listener != null;
+            listener.onFinishSelectingDialog(filterBy);
+            dismiss();
+        } else {
+            Toast.makeText(this.getContext(), "Please select at least one option", Toast.LENGTH_LONG).show();
+        }
     }
 }
 

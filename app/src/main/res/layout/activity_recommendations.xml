@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,43 +24,44 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/filterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:text="Filter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ResourceRecycler" />
-
-    <Button
         android:id="@+id/eventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Events"
+        app:layout_constraintBottom_toTopOf="@+id/ResourceRecycler"
         app:layout_constraintEnd_toStartOf="@+id/groupButton"
         app:layout_constraintStart_toEndOf="@+id/resourceButton"
-        tools:layout_editor_absoluteY="5dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/resourceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:text="Resources"
+        app:layout_constraintBottom_toTopOf="@+id/ResourceRecycler"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="6dp" />
+        app:layout_constraintEnd_toStartOf="@id/eventButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/groupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="2dp"
         android:text="Groups"
+        app:layout_constraintBottom_toTopOf="@+id/ResourceRecycler"
+        app:layout_constraintStart_toEndOf="@id/eventButton"
+        app:layout_constraintEnd_toStartOf="@id/filterButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/filter"
+        android:text="Filter"
+        app:layout_constraintBottom_toTopOf="@id/ResourceRecycler"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="9dp" />
+        app:layout_constraintStart_toEndOf="@id/groupButton"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
