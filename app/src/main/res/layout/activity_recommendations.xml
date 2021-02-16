@@ -29,6 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="84dp"
         android:text="Filter"
+        android:textColor="@color/dark_purple"
+        app:backgroundTint="@color/electric_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -40,6 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Events"
+        android:textColor="@color/dark_purple"
+        app:backgroundTint="@color/purple_200"
         app:layout_constraintEnd_toStartOf="@+id/groupButton"
         app:layout_constraintStart_toEndOf="@+id/resourceButton"
         tools:layout_editor_absoluteY="5dp" />
@@ -51,6 +55,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="Resources"
+        android:textColor="@color/dark_purple"
+        app:backgroundTint="@color/purple_200"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="6dp" />
 
@@ -61,6 +67,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Groups"
+        android:textColor="@color/dark_purple"
+        app:backgroundTint="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="9dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

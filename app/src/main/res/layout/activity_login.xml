@@ -52,6 +52,8 @@
         android:layout_marginBottom="64dp"
         android:enabled="false"
         android:text="@string/log_in"
+        android:textColor="@color/dark_purple"
+        app:backgroundTint="@color/electric_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

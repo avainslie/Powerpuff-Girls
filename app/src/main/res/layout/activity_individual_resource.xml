@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/res_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textColor="#000000"
+        android:textColor="@color/dark_purple"
         app:layout_constraintBottom_toTopOf="@+id/resource_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,22 +25,22 @@
         android:layout_margin="15dp"
         android:text="@string/res_description"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#000000"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resource_name" />
 
     <TextView
         android:id="@+id/resource_link"
-        android:text="@string/res_link"
-        android:textColorLink="#3F51B5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/res_link"
+        android:textColor="@color/electric_blue"
+        android:textColorLink="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resource_description"
+        app:layout_constraintStart_toStartOf="parent"
 
-        />
+        app:layout_constraintTop_toBottomOf="@+id/resource_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
