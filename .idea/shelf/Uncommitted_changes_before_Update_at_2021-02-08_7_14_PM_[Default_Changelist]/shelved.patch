@@ -1,0 +1,127 @@
+Index: app/src/main/java/com/example/powerpuffgirls/EducationInfoActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.powerpuffgirls;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.content.Intent;\r\nimport android.util.Log;\r\nimport android.widget.*;\r\nimport android.view.View;\r\n\r\n\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.firestore.CollectionReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\n\r\nimport java.util.HashMap;\r\n\r\npublic class EducationInfoActivity extends AppCompatActivity {\r\n\r\n    FirebaseFirestore fstore;\r\n    private FirebaseAuth fAuth;\r\n    Spinner studentSpinner;\r\n    TextView mOutputSpinnerSection;\r\n    String studentType;\r\n    //options to be displayed in spinner\r\n    String[] studentTypes = {\"Undergraduate Student\", \"Graduate Student\", \"High School Student\", \"Mature Student\", \"Diploma Student\", \"Certificate Student\"};\r\n\r\n    Spinner fieldOfStudySpinner;\r\n    TextView studyOutputSpinnerSection;\r\n    String fieldOfStudy;\r\n    //options to be displayed in spinner\r\n    String[] fieldsOfStudy = {\"Art\", \"Business\", \"Science\", \"Engineering\"};\r\n\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        fstore=FirebaseFirestore.getInstance();\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_education_info);\r\n\r\n        FloatingActionButton toInterests = (FloatingActionButton) findViewById(R.id.buttonToInterests);\r\n        toInterests.setOnClickListener(InterestsView -> openInterestsActivity());\r\n\r\n        studentSpinner = findViewById(R.id.studentSpinnerButton);\r\n        mOutputSpinnerSection = findViewById(R.id.outputSpinnerSection);\r\n\r\n        fieldOfStudySpinner=findViewById(R.id.fieldOfStudySpinnerButton);\r\n        studyOutputSpinnerSection=findViewById(R.id.fieldOfStudyTitle);\r\n\r\n\r\n\r\n        //Creating the ArrayAdapter instance having the list of options\r\n        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, studentTypes);\r\n        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        //setting the ArrayAdapter data on the Spinner\r\n        studentSpinner.setAdapter(aa);\r\n\r\n        ArrayAdapter fs = new ArrayAdapter(this, android.R.layout.simple_spinner_item, fieldsOfStudy);\r\n        fs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        fieldOfStudySpinner.setAdapter(fs);\r\n\r\n        //spinner item click handler\r\n        studentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                //METHOD 1: Get text from selected item's position & set it to TextView\r\n                //mOutputSpinnerTv.setText(parent.getItemAtPosition(position).toString());\r\n\r\n                //METHOD 2: Get the position of item selected, & perform specific task\r\n                if (position == 0) {\r\n                    //mOutputSpinnerSection.setText(\"Undergraduate Student selected\");\r\n                    studentType = \"Undergraduate Student\";\r\n\r\n                }\r\n                if (position == 1) {\r\n                    // mOutputSpinnerSection.setText(\"Graduate Student selected...\");\r\n                    studentType = \"Graduate Student\";\r\n                }\r\n                if (position == 2) {\r\n                    // mOutputSpinnerSection.setText(\"High School Student selected...\");\r\n                    studentType = \"High School Student\";\r\n                }\r\n                if (position == 3) {\r\n                    // mOutputSpinnerSection.setText(\"Mature Student is selected...\");\r\n                    studentType = \"Mature Student\";\r\n                }\r\n                if (position == 4) {\r\n                    // mOutputSpinnerSection.setText(\"Mature Student is selected...\");\r\n                    studentType = \"Diploma Student\";\r\n                }\r\n                if (position == 5) {\r\n                    // mOutputSpinnerSection.setText(\"Mature Student is selected...\");\r\n                    studentType = \"Certificate Student\";\r\n                }\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n                Toast.makeText(getApplicationContext(),\"Please select a student type!\",Toast.LENGTH_LONG).show();\r\n            }\r\n        });\r\n\r\n        fieldOfStudySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                //METHOD 1: Get text from selected item's position & set it to TextView\r\n                //mOutputSpinnerTv.setText(parent.getItemAtPosition(position).toString());\r\n\r\n                //METHOD 2: Get the position of item selected, & perform specific task\r\n                if (position == 0) {\r\n                    //mOutputSpinnerSection.setText(\"Undergraduate Student selected\");\r\n                    fieldOfStudy = \"Art\";\r\n                }\r\n                if (position == 1) {\r\n                    // mOutputSpinnerSection.setText(\"Graduate Student selected...\");\r\n                    fieldOfStudy = \"Business\";\r\n                }\r\n                if (position == 2) {\r\n                    // mOutputSpinnerSection.setText(\"High School Student selected...\");\r\n                    fieldOfStudy = \"Science\";\r\n                }\r\n                if (position == 3) {\r\n                    // mOutputSpinnerSection.setText(\"Mature Student is selected...\");\r\n                    fieldOfStudy = \"Engineering\";\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n                Toast.makeText(getApplicationContext(),\"Please select a study area!\",Toast.LENGTH_LONG).show();\r\n            }\r\n        });\r\n\r\n\r\n\r\n    }\r\n\r\n    public void openInterestsActivity(){\r\n        RadioGroup sStudentStatus = (RadioGroup) findViewById(R.id.studentStatus);\r\n        RadioGroup sStudentResidency=(RadioGroup) findViewById(R.id.studentResidency);\r\n        int selectedStatus = sStudentStatus.getCheckedRadioButtonId();\r\n        int selectedResidency = sStudentResidency.getCheckedRadioButtonId();\r\n        // find the radiobutton by returned id\r\n        RadioButton statusButton = (RadioButton) findViewById(selectedStatus);\r\n        String status= statusButton.getText().toString().trim();\r\n        RadioButton residencyButton=(RadioButton)findViewById(selectedResidency);\r\n        String residency=residencyButton.getText().toString().trim();\r\n        //Map<String, String> userMap =new HashMap<>();\r\n\r\n        SignUpActivity a= new SignUpActivity();\r\n        HashMap<String, String> map = a.getHashmap();\r\n        map.put(\"studentType\",studentType);\r\n\r\n        map.put(\"fieldOfStudy\",fieldOfStudy);\r\n        map.put(\"status\",status);\r\n        map.put(\"residency\",residency);\r\n\r\n        CollectionReference data = fstore.collection(\"Users\");\r\n        data.add(map);\r\n\r\n\r\n\r\n        Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);\r\n        startActivity(interestsIntent);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/powerpuffgirls/EducationInfoActivity.java	(revision c102aa23c861d44b524621b8c8f161becff91ca0)
++++ app/src/main/java/com/example/powerpuffgirls/EducationInfoActivity.java	(date 1612402547072)
+@@ -162,8 +162,6 @@
+         CollectionReference data = fstore.collection("Users");
+         data.add(map);
+ 
+-
+-
+         Intent interestsIntent=new Intent(this, InterestsInfoActivity.class);
+         startActivity(interestsIntent);
+     }
+Index: app/src/main/res/layout/activity_interests_info.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".InterestsInfoActivity\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/interestsTitle\"\r\n        android:layout_width=\"249dp\"\r\n        android:layout_height=\"32dp\"\r\n        android:layout_marginTop=\"84dp\"\r\n        android:layout_marginBottom=\"615dp\"\r\n        android:text=\"@string/tell_us\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <com.google.android.material.floatingactionbutton.FloatingActionButton\r\n        android:id=\"@+id/buttonToUserProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"327dp\"\r\n        android:layout_marginLeft=\"327dp\"\r\n        android:layout_marginTop=\"621dp\"\r\n        android:layout_marginEnd=\"28dp\"\r\n        android:layout_marginRight=\"28dp\"\r\n        android:layout_marginBottom=\"54dp\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"auto\"\r\n        android:rotation=\"90\"\r\n        android:rotationX=\"-2\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@android:drawable/arrow_up_float\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_interests_info.xml	(revision c102aa23c861d44b524621b8c8f161becff91ca0)
++++ app/src/main/res/layout/activity_interests_info.xml	(date 1612405705920)
+@@ -12,7 +12,7 @@
+         android:layout_height="32dp"
+         android:layout_marginTop="84dp"
+         android:layout_marginBottom="615dp"
+-        android:text="@string/tell_us"
++        android:text="Tell us about Yourself"
+         android:textSize="20sp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+@@ -36,7 +36,65 @@
+         android:rotationX="-2"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="1.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.617"
+         app:srcCompat="@android:drawable/arrow_up_float" />
++
++    <RadioGroup
++        android:layout_width="286dp"
++        android:layout_height="109dp"
++        tools:layout_editor_absoluteX="44dp"
++        tools:layout_editor_absoluteY="268dp" >
++
++        <CheckBox
++            android:id="@+id/checkBox7"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox4"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox5"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox2"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox10"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox9"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox6"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++
++        <CheckBox
++            android:id="@+id/checkBox8"
++            android:layout_width="136dp"
++            android:layout_height="25dp"
++            android:text="CheckBox" />
++    </RadioGroup>
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_education_info.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".EducationInfoActivity\">\r\n\r\n\r\n    <com.google.android.material.floatingactionbutton.FloatingActionButton\r\n        android:id=\"@+id/buttonToInterests\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"327dp\"\r\n        android:layout_marginLeft=\"327dp\"\r\n        android:layout_marginTop=\"621dp\"\r\n        android:layout_marginEnd=\"28dp\"\r\n        android:layout_marginRight=\"28dp\"\r\n        android:layout_marginBottom=\"54dp\"\r\n        android:clickable=\"true\"\r\n        android:rotation=\"90\"\r\n        android:rotationX=\"-2\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.703\"\r\n        app:srcCompat=\"@android:drawable/arrow_up_float\" />\r\n\r\n    <Spinner\r\n        android:id=\"@+id/studentSpinnerButton\"\r\n        android:layout_width=\"298dp\"\r\n        android:layout_height=\"29dp\"\r\n        android:layout_marginTop=\"85dp\"\r\n        android:layout_marginBottom=\"492dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.495\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.352\"></Spinner>\r\n\r\n    <TextView\r\n        android:id=\"@+id/fieldOfStudyTitle\"\r\n        android:layout_width=\"210dp\"\r\n        android:layout_height=\"30dp\"\r\n        android:layout_marginStart=\"56dp\"\r\n        android:layout_marginLeft=\"56dp\"\r\n        android:layout_marginTop=\"292dp\"\r\n        android:layout_marginEnd=\"165dp\"\r\n        android:layout_marginRight=\"165dp\"\r\n        android:layout_marginBottom=\"284dp\"\r\n        android:text=\"Field of Study\"\r\n        android:textSize=\"18dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.651\" />\r\n\r\n    <Spinner\r\n        android:id=\"@+id/fieldOfStudySpinnerButton\"\r\n        android:layout_width=\"317dp\"\r\n        android:layout_height=\"31dp\"\r\n        android:layout_marginTop=\"324dp\"\r\n        android:layout_marginBottom=\"236dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.51\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.642\"></Spinner>\r\n\r\n    <RadioGroup\r\n        android:id=\"@+id/studentStatus\"\r\n        android:layout_width=\"310dp\"\r\n        android:layout_height=\"70dp\"\r\n        android:layout_marginTop=\"124dp\"\r\n        android:layout_marginBottom=\"404dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.462\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/partTime\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"36dp\"\r\n            android:text=\"Part-Time Student\" />\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/fulltime\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"35dp\"\r\n            android:text=\"Full-Time Student\" />\r\n\r\n    </RadioGroup>\r\n\r\n    <RadioGroup\r\n        android:id=\"@+id/studentResidency\"\r\n        android:layout_width=\"308dp\"\r\n        android:layout_height=\"70dp\"\r\n        android:layout_marginTop=\"214dp\"\r\n        android:layout_marginBottom=\"316dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.464\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/canadian\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"34dp\"\r\n            android:text=\"Canadian or Permanent Resident\" />\r\n\r\n        <RadioButton\r\n            android:id=\"@+id/international\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"International Student\" />\r\n    </RadioGroup>\r\n\r\n    <TextView\r\n        android:id=\"@+id/outputSpinnerSection\"\r\n        android:layout_width=\"305dp\"\r\n        android:layout_height=\"30dp\"\r\n        android:layout_centerHorizontal=\"true\"\r\n        android:layout_centerVertical=\"true\"\r\n        android:layout_marginStart=\"55dp\"\r\n        android:layout_marginLeft=\"55dp\"\r\n        android:layout_marginTop=\"96dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:layout_marginRight=\"60dp\"\r\n        android:layout_marginBottom=\"605dp\"\r\n        android:text=\"  I am a/an.... \"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/educationInfoTitle\"\r\n        android:layout_width=\"307dp\"\r\n        android:layout_height=\"20dp\"\r\n        android:layout_marginBottom=\"656dp\"\r\n        android:text=\"Tell Us About your Education\"\r\n        android:textSize=\"18dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.49\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/fieldsOfInterestED\"\r\n        android:layout_width=\"306dp\"\r\n        android:layout_height=\"44dp\"\r\n        android:layout_marginTop=\"458dp\"\r\n        android:layout_marginBottom=\"233dp\"\r\n        android:text=\"Educational fields of Interest                                   (Select All that Apply)\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_education_info.xml	(revision c102aa23c861d44b524621b8c8f161becff91ca0)
++++ app/src/main/res/layout/activity_education_info.xml	(date 1612406490692)
+@@ -147,12 +147,12 @@
+         android:id="@+id/educationInfoTitle"
+         android:layout_width="307dp"
+         android:layout_height="20dp"
+-        android:layout_marginBottom="656dp"
++        android:layout_marginBottom="572dp"
+         android:text="Tell Us About your Education"
+         android:textSize="18dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.49"
++        app:layout_constraintHorizontal_bias="0.269"
+         app:layout_constraintStart_toStartOf="parent" />
+ 
+     <TextView
