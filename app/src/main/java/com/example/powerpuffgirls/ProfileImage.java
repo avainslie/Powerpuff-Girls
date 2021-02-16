@@ -1,20 +1,29 @@
 package com.example.powerpuffgirls;
 
-import android.widget.ImageView;
+import android.net.Uri;
 
 public class ProfileImage {
 
     private static byte[] imgbytes;
+    public static Uri imgUri;
 
     public void ProfileImage(){
 
     }
 
-    public static byte[] getImgbytes() {
+    public void ProfileImage(Uri uri){
+        this.imgUri = uri;
+    }
+
+    public byte[] getImgbytes() {
         return imgbytes;
     }
 
-    public static void setImgbytes(byte[] imgbytes) {
-        ProfileImage.imgbytes = imgbytes;
+    public void setImgbytes(byte[] imgbytes) {
+        this.imgbytes = imgbytes;
     }
+
+    public Uri getImgUri(){ return imgUri; }
+
+    public void setImgUri(Uri imgUri){ this.imgUri = imgUri;}
 }

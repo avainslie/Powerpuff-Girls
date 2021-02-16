@@ -15,6 +15,7 @@
         android:focusable="auto"
         android:rotation="90"
         android:rotationX="-2"
+        app:backgroundTint="@color/electric_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.845"

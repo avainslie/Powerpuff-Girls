@@ -22,7 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.*;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,28 +45,25 @@ public class AboutYouActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_you);
         fstore=FirebaseFirestore.getInstance();
 
-        Button uploadImage = (Button) findViewById(R.id.uploadImageButton);
+        Button uploadImage = findViewById(R.id.uploadImageButton);
         uploadImage.setOnClickListener(UploadImageView -> {
             Intent i = new Intent(
                     Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, RESULT_LOAD_IMAGE);
         });
-            FloatingActionButton toEducationInfo = (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
-            toEducationInfo.setOnClickListener(EducationInfoView -> openEducationInfoActivity());
+        FloatingActionButton toEducationInfo= (FloatingActionButton) findViewById(R.id.buttonToEducationInfo);
+        toEducationInfo.setOnClickListener(EducationInfoView-> openEducationInfoActivity());
+
+
     }
-    //Ethnicities
 
-
-
-
-
-    public void openEducationInfoActivity() {
-        CheckBox caucasian= (CheckBox) findViewById(R.id.caucasian);
-        CheckBox asian= (CheckBox) findViewById(R.id.asian);
-        CheckBox hispanic= (CheckBox) findViewById(R.id.hispanic);
-        CheckBox black= (CheckBox) findViewById(R.id.black);
-        CheckBox middleEastern= (CheckBox) findViewById(R.id.middleeastern);
-        CheckBox otherEthnicity= (CheckBox) findViewById(R.id.otherEthnicity);
+    public void openEducationInfoActivity(){
+        CheckBox caucasian= findViewById(R.id.caucasian);
+        CheckBox asian=  findViewById(R.id.asian);
+        CheckBox hispanic=  findViewById(R.id.hispanic);
+        CheckBox black=  findViewById(R.id.black);
+        CheckBox middleEastern=  findViewById(R.id.middleeastern);
+        CheckBox otherEthnicity= findViewById(R.id.otherEthnicity);
         List ethnicities=new ArrayList<>();
         RadioGroup sGenderOptions = (RadioGroup) findViewById(R.id.genderOptions);
         RadioGroup sEthnicityOptions=(RadioGroup) findViewById(R.id.ethnicityOptions);
@@ -90,17 +89,16 @@ public class AboutYouActivity extends AppCompatActivity {
         }
 
 
-        try {
-            // find the radiobutton by returned id
-            RadioButton genderButton = (RadioButton) findViewById(selectedGender);
-            //CheckBox ethnicityCheckbox=(CheckBox) findViewById(selectedEthnicity);
-            String gender = genderButton.getText().toString().trim();
-            //String ethnicity=ethnicityCheckbox.getText().toString().trim();
-            //Map<String, String> userMap =new HashMap<>();
-            SignUpActivity a = new SignUpActivity();
-            HashMap<String, String> map = a.getHashmap();
-            map.put("gender", gender);
-            map.put("ethnicity", ethnicities.toString());
+
+        // find the radiobutton by returned id
+        RadioButton genderButton = findViewById(selectedGender);
+
+        String gender= genderButton.getText().toString().trim();
+
+        SignUpActivity a= new SignUpActivity();
+        HashMap<String, String> map = a.getHashmap();
+        map.put("gender",gender);
+        map.put("ethnicity",ethnicities.toString());
 
             //CheckBox ethnicityCheckbox=(CheckBox)findViewById(selectedEthnicity);
             //String ethnicity =ethnicityCheckbox.getText().toString().trim();
@@ -126,9 +124,14 @@ public class AboutYouActivity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
+
             // String picturePath contains the path of selected Image
             ImageView imageView = (ImageView) findViewById(R.id.profilePicture);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            ProfileImage pi = new ProfileImage();
+            pi.setImgbytes(getByteArray(imageView));
+
         }
     }
 

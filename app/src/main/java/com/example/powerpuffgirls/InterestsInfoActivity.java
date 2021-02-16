@@ -1,8 +1,11 @@
 package com.example.powerpuffgirls;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.CheckBox;
 import android.widget.Switch;
 
@@ -17,8 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InterestsInfoActivity extends AppCompatActivity {
-
+    ProfileImage pi = new ProfileImage();
     FirebaseFirestore fstore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         fstore= FirebaseFirestore.getInstance();
@@ -120,18 +124,22 @@ public class InterestsInfoActivity extends AppCompatActivity {
         CollectionReference data = fstore.collection("Users");
         data.add(map);
 
-        ProfileImage pi = new ProfileImage();
-        if (pi.getImgbytes() != null){
-            data.add(pi.getImgbytes());
-        }
 
-
+//        if (pi.getImgUri() == null){
+//            Log.d("NULL", "pi.getImgUri was null");
+//        }
+//        else{
+//            data.add(pi.getImgUri());
+//        }
 
         startActivity(mainApp);
     }
 
-
-
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(pi.getImgUri()));
+    }
 
 }
 
