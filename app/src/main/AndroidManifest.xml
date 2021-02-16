@@ -2,6 +2,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.powerpuffgirls">
+    <uses-permission android:name="android.permission.INTERNET"/>
     send_button.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v)
