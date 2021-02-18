@@ -12,14 +12,14 @@ It serves students of all ages and degree levels.
 Users create a profile based on their demographics and can filter through the resources based on certain factors. 
 
 
-<img src= "signup.png" width="250" height="620" />
+<img src= "signup.png" width="250" height="520" />
 
 
 ComeUp allows users to access all resources as well as filtered views, offering the best experience and chance for success to it's users. 
 
 
 
-<img src= "gif.gif" width="250" height="620" />
+<img src= "gif.gif" width="250" height="520" />
 
 
 
@@ -28,7 +28,7 @@ Many students are struggling with online school and are lacking motivation and t
 
 
 
-<img src= "activity.png" width="250" height="620" />
+<img src= "activity.png" width="250" height="520" />
 
 
 
