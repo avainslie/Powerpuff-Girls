@@ -123,6 +123,7 @@ public class RecommendationsFragment extends Fragment implements View.OnClickLis
 
             Intent i = new Intent(getContext(), IndividualResource.class);
             i.putExtra("id", id);
+            i.putExtra("collectionPath", currentView);
 
             startActivity(i);
         });
