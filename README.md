@@ -25,6 +25,9 @@ ComeUp allows users to access all resources as well as filtered views, offering 
 
 
 Many students are struggling with online school and are lacking motivation and things to do. ComeUp helps by offering an activity of the day to increase mental and physical health during these challenging times. 
+
+
+
 <img src= "activity.png" width="250" height="620" />
 
 
