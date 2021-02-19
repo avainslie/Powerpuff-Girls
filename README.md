@@ -33,7 +33,7 @@ Many students are struggling with online school and are lacking motivation and t
 
 
 
-For a full tour of the app and project please watch this video: [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/qCztRDDIYrQ&feature=youtu.be&ab_channel=CandyNwigwe/0.jpg)](https://www.youtube.com/watch?v=qCztRDDIYrQ&feature=youtu.be&ab_channel=CandyNwigwe)
+For a full tour of the app and project please watch click [here to watch a YouTube video.](https://www.youtube.com/watch?v=qCztRDDIYrQ&feature=youtu.be&ab_channel=CandyNwigwe)
 
 
 Coded by the Powerpuff Girls Team
