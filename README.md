@@ -37,4 +37,5 @@ For a full tour of the app and project please watch this video: INSERT YOUTUBE L
 
 
 Coded by the Powerpuff Girls Team
+Special thanks to Kailee-Anne Pilling for the logo
 ![The girls](ppg.png)
